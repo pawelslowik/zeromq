@@ -16,6 +16,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by psl on 14.04.17.
+ *
+ * PAIR pattern allows client to connect directly to server.
+ * After sending request, client doesn't have to wait for response,
+ * it can send consecutive requests and after that, get all responses.
+ *
+ * There can be only one connected peer.
  */
 @Component
 @Profile(Profiles.PAIR)
