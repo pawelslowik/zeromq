@@ -6,4 +6,6 @@ package pl.com.psl.zeromq.jeromq;
 public class Profiles {
 
     public static final String PAIR = "pair";
+    public static final String REQ_REP = "req-rep";
+
 }
