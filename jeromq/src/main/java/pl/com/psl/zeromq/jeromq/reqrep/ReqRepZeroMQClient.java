@@ -1,7 +1,5 @@
 package pl.com.psl.zeromq.jeromq.reqrep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -25,7 +23,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class ReqRepZeroMQClient extends ZeroMQClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReqRepZeroMQClient.class);
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private AtomicInteger atomicInteger = new AtomicInteger();
 

@@ -1,7 +1,5 @@
 package pl.com.psl.zeromq.jeromq.pair;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -20,7 +18,6 @@ import java.util.concurrent.Executors;
 @Profile(Profiles.PAIR)
 public class PairZeroMQServer extends ZeroMQServer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PairZeroMQServer.class);
     static final String ADDRESS = "tcp://localhost:8090";
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 

@@ -1,7 +1,5 @@
 package pl.com.psl.zeromq.jeromq.reqrep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -22,7 +20,6 @@ import java.util.concurrent.Executors;
 @Component
 public class ReqRepZeroMQServer extends ZeroMQServer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReqRepZeroMQServer.class);
     static final List<String> ADDRESSES = Arrays.asList("tcp://localhost:8071", "tcp://localhost:8072", "tcp://localhost:8073");
     private ExecutorService executorService = Executors.newFixedThreadPool(ADDRESSES.size());
 

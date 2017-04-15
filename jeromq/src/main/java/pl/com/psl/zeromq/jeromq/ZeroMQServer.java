@@ -9,7 +9,7 @@ import org.zeromq.ZContext;
  */
 public abstract class ZeroMQServer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ZeroMQServer.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ZeroMQServer.class);
     protected ZContext zContext;
 
     public ZeroMQServer(ZContext zContext) {
