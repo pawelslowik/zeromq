@@ -8,7 +8,6 @@ import org.zeromq.ZMQ;
 import pl.com.psl.zeromq.jeromq.Profiles;
 import pl.com.psl.zeromq.jeromq.ZeroMQServer;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
@@ -19,11 +18,10 @@ import java.util.concurrent.Executors;
 public class PairZeroMQServer extends ZeroMQServer {
 
     static final String ADDRESS = "tcp://localhost:8090";
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Autowired
     public PairZeroMQServer(ZContext zContext) {
-        super(zContext);
+        super(zContext, Executors.newSingleThreadExecutor());
     }
 
     @Override
@@ -32,7 +30,7 @@ public class PairZeroMQServer extends ZeroMQServer {
             LOGGER.info("Creating and binding PAIR socket...");
             ZMQ.Socket socket = zContext.createSocket(ZMQ.PAIR);
             socket.bind(ADDRESS);
-            while(!Thread.interrupted()){
+            while (!Thread.interrupted()) {
                 LOGGER.info("Listening for requests...");
                 String request = socket.recvStr();
                 LOGGER.info("Received request={}", request);
@@ -42,10 +40,5 @@ public class PairZeroMQServer extends ZeroMQServer {
                 LOGGER.info("Response sent!");
             }
         });
-    }
-
-    @Override
-    protected void stopInternal() {
-        executorService.shutdown();
     }
 }

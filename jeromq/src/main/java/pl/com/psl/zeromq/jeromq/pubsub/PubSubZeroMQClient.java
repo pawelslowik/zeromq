@@ -8,12 +8,11 @@ import org.zeromq.ZMQ;
 import pl.com.psl.zeromq.jeromq.Profiles;
 import pl.com.psl.zeromq.jeromq.ZeroMQClient;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
  * Created by psl on 15.04.17.
- *
+ * <p>
  * PUB-SUB pattern allows client (subscriber) to connect to multiple servers (publishers)
  * and filter out only messages with given prefix (messages from server beginning with prefix).
  * Also, multiple clients can subscribe messages from single server.
@@ -22,11 +21,9 @@ import java.util.concurrent.Executors;
 @Component
 public class PubSubZeroMQClient extends ZeroMQClient {
 
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
-
     @Autowired
     public PubSubZeroMQClient(ZContext zContext) {
-        super(zContext);
+        super(zContext, Executors.newSingleThreadExecutor());
     }
 
     @Override
@@ -36,16 +33,11 @@ public class PubSubZeroMQClient extends ZeroMQClient {
             ZMQ.Socket socket = zContext.createSocket(ZMQ.SUB);
             PubSubZeroMQServer.ADDRESSES.forEach(socket::connect);
             socket.subscribe(PubSubZeroMQServer.PREFIX_B.getBytes());
-            while (!Thread.interrupted()){
+            while (!Thread.interrupted()) {
                 LOGGER.info("Listening for messages...");
                 String message = socket.recvStr();
                 LOGGER.info("Received message={}", message);
             }
         });
-    }
-
-    @Override
-    protected void stopInternal() {
-        executorService.shutdown();
     }
 }

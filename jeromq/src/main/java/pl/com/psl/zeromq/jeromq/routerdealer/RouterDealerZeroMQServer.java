@@ -8,7 +8,6 @@ import org.zeromq.ZMQ;
 import pl.com.psl.zeromq.jeromq.Profiles;
 import pl.com.psl.zeromq.jeromq.ZeroMQServer;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
@@ -18,12 +17,11 @@ import java.util.concurrent.Executors;
 @Component
 public class RouterDealerZeroMQServer extends ZeroMQServer {
 
-    private int THREAD_POOL_SIZE = 3;
-    private ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+    private static final int THREAD_POOL_SIZE = 3;
 
     @Autowired
     public RouterDealerZeroMQServer(ZContext zContext) {
-        super(zContext);
+        super(zContext, Executors.newFixedThreadPool(THREAD_POOL_SIZE));
     }
 
     @Override
@@ -44,10 +42,5 @@ public class RouterDealerZeroMQServer extends ZeroMQServer {
                 }
             });
         }
-    }
-
-    @Override
-    protected void stopInternal() {
-        executorService.shutdown();
     }
 }

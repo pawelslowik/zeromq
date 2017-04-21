@@ -22,9 +22,11 @@ public class App {
         addShutdownHook(context);
         context.register(Config.class);
         ConfigurableEnvironment environment = context.getEnvironment();
+        LOGGER.info("Running App with active profiles={}", environment.getActiveProfiles());
         if(environment.getActiveProfiles().length == 0){
             environment.setActiveProfiles(Profiles.PAIR);
         }
+        LOGGER.info("Running App with active profiles={}", environment.getActiveProfiles());
         context.refresh();
         LOGGER.info("Application started");
     }

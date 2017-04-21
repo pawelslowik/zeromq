@@ -8,7 +8,6 @@ import org.zeromq.ZMQ;
 import pl.com.psl.zeromq.jeromq.Profiles;
 import pl.com.psl.zeromq.jeromq.ZeroMQClient;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,14 +18,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class RouterDealerZeroMQClient extends ZeroMQClient {
 
-    private int THREAD_POOL_SIZE = 2;
-    private ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+    private static final int THREAD_POOL_SIZE = 2;
     private AtomicInteger atomicInteger = new AtomicInteger();
     private RouterDealerZeroMQBroker broker;
 
     @Autowired
     public RouterDealerZeroMQClient(ZContext zContext, RouterDealerZeroMQBroker broker) {
-        super(zContext);
+        super(zContext, Executors.newFixedThreadPool(THREAD_POOL_SIZE));
         this.broker = broker;
     }
 
@@ -65,8 +63,8 @@ public class RouterDealerZeroMQClient extends ZeroMQClient {
     }
 
     @Override
-    protected void stopInternal() {
+    protected void stop() {
         broker.stop();
-        executorService.shutdown();
+        super.stop();
     }
 }

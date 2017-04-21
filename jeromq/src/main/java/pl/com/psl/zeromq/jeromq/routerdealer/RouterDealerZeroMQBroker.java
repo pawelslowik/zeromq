@@ -11,6 +11,7 @@ import pl.com.psl.zeromq.jeromq.Profiles;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by psl on 17.04.17.
@@ -45,6 +46,14 @@ public class RouterDealerZeroMQBroker {
     }
 
     protected void stop() {
-        executorService.shutdown();
+        LOGGER.info("Stopping ZeroMQ broker...");
+        executorService.shutdownNow();
+        boolean terminated = false;
+        try {
+            terminated = executorService.awaitTermination(1, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            LOGGER.error("Waiting for broker termination interrupted", e);
+        }
+        LOGGER.info("ZeroMQ broker stopped={}", terminated);
     }
 }
