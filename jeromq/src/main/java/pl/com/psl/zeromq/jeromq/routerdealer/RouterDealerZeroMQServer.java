@@ -12,6 +12,10 @@ import java.util.concurrent.Executors;
 
 /**
  * Created by psl on 17.04.17.
+ *
+ * ROUTER-DEALER pattern is similar to REQ-REP, but additionally it introduces a broker that works between the client and the server.
+ * That way client knows only the broker, which receives the request, forwards it one of available servers, and when server delivers the response,
+ * broker sends it back to the respective client. Client knows nothing about the server(s), broker hides all connectivity details.
  */
 @Profile(Profiles.ROUTER_DEALER)
 @Component
