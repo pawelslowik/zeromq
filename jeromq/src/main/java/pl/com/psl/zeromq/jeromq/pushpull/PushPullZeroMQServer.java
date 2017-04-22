@@ -73,7 +73,7 @@ public class PushPullZeroMQServer extends ZeroMQServer {
                 responseCounter++;
                 LOGGER.info("Received response={}", response);
                 if (NUMBER_OF_REQUESTS == responseCounter) {
-                    LOGGER.info("Received all responses in {} seconds", Duration.between(startInstant, latestResponseInstant).getSeconds());
+                    LOGGER.info("Received all responses in {} second(s)", Duration.between(startInstant, latestResponseInstant).getSeconds());
                 }
             }
         });

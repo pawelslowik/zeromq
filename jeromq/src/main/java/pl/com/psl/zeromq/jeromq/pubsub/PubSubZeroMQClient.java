@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 /**
  * Created by psl on 15.04.17.
- * <p>
+ *
  * PUB-SUB pattern allows client (subscriber) to connect to multiple servers (publishers)
  * and filter out only messages with given prefix (messages from server beginning with prefix).
  * Also, multiple clients can subscribe messages from single server.

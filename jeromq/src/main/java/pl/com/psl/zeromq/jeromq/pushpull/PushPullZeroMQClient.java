@@ -13,14 +13,12 @@ import java.util.stream.IntStream;
 
 /**
  * Created by psl on 22.04.17.
- * <p>
+ *
  * PUSH-PULL pattern provides a processing pipeline, in which ventilator sends requests evenly to all connected workers
  * (working in parallel), but responses from workers are not sent back to ventilator, but rather to the sink
  * - all messages go through sockets in one direction - down the pipeline.
- *
  * All workers have to be connected to PUSH/PULL sockets before ventilator sends first request, otherwise one of workers might
  * get all requests.
- *
  * In this example, to keep the code structure simple, server is the ventilator, client threads are workers,
  * and the role of sink is played by a separate thread in server, listening on different socket than ventilator.
  */

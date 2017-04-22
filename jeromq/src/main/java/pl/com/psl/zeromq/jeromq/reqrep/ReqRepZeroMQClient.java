@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by psl on 14.04.17.
- * <p>
+ *
  * REQ-REP pattern allows any number of clients be connected to any number of servers.
  * Requests from clients are distributed among servers, client blocks until getting a response
  * and server blocks until getting a request, requests and responses are automatically paired.
